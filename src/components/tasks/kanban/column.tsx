@@ -1,17 +1,31 @@
 import { Text } from "@/components/text";
 import { PlusOutlined } from "@ant-design/icons";
-import { useDroppable } from "@dnd-kit/core";
+import { useDroppable, UseDroppableArguments } from "@dnd-kit/core";
 import { Badge, Button, Space } from "antd";
 import React from "react";
 
-const KanbanColumn = ({ children }: React.PropsWithChildren) => {
-  const { isOver, setNodeRef, active } = useDroppable({ id: "", data: "" });
+type Props = {
+  id: string;
+  title: string;
+  description?: React.ReactNode;
+  count: number;
+  data?: UseDroppableArguments["data"];
+  onAddClick?: (args: { id: string }) => void;
+};
 
-  const count = 2;
-  const description = "Description";
-  const title = "Title";
+const KanbanColumn = ({
+  children,
+  id,
+  title,
+  description,
+  data,
+  onAddClick,
+}: React.PropsWithChildren<Props>) => {
+  const { isOver, setNodeRef, active } = useDroppable({ id, data });
 
-  const onAddClickHandler = () => {};
+  const onAddClickHandler = () => {
+    onAddClick?.({ id });
+  };
 
   return (
     <div
@@ -29,7 +43,7 @@ const KanbanColumn = ({ children }: React.PropsWithChildren) => {
             >
               {title}
             </Text>
-            {!!count && <Badge count={count} color="cyan" />}
+            {/* {!!count && <Badge count={count} color="cyan" />} */}
           </Space>
           <Button
             shape="circle"
