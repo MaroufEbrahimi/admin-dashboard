@@ -2,22 +2,22 @@ import { Text } from "@/components/text";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDroppable, UseDroppableArguments } from "@dnd-kit/core";
 import { Badge, Button, Space } from "antd";
-import React from "react";
 
 type Props = {
   id: string;
   title: string;
   description?: React.ReactNode;
   count: number;
-  data?: UseDroppableArguments["data"];
+  data?: ["data"];
   onAddClick?: (args: { id: string }) => void;
-};
+}; 
 
 const KanbanColumn = ({
   children,
   id,
   title,
   description,
+  count,
   data,
   onAddClick,
 }: React.PropsWithChildren<Props>) => {
@@ -43,7 +43,7 @@ const KanbanColumn = ({
             >
               {title}
             </Text>
-            {/* {!!count && <Badge count={count} color="cyan" />} */}
+            {!!count && <Badge count={count} color="cyan" />}
           </Space>
           <Button
             shape="circle"

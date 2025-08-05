@@ -11,7 +11,7 @@ export const KanbanBoardContainer = ({ children }: React.PropsWithChildren) => {
         justifyContent: "column",
         margin: "-32px",
       }}
-    >
+    > 
       <div
         style={{
           width: "100%",

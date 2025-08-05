@@ -1,5 +1,5 @@
 import { User } from "@/graphql/schema.types";
-import React from "react";
+import { Card, ConfigProvider, theme } from "antd";
 
 type ProjectCardProps = {
   id: string;
@@ -14,7 +14,24 @@ type ProjectCardProps = {
 };
 
 const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
-  return <div>ProjectCard</div>;
+  const { token } = theme.useToken();
+
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Tag: {
+            colorText: token.colorTextSecondary,
+          },
+          Card: {
+            headerBg: "transparent",
+          },
+        },
+      }}
+    >
+      <Card></Card>
+    </ConfigProvider>
+  );
 };
 
 export default ProjectCard;

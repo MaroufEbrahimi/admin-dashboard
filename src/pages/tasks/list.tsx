@@ -43,19 +43,19 @@ const List = () => {
   const taskStages = React.useMemo(() => {
     if (!tasks?.data || !stages?.data) {
       return {
-        unnasignedState: [],
+        unassignedStage: [],
         stages: [],
       };
     }
 
-    const unnasignedState = tasks.data.filter((task) => task.stageId === null);
+    const unassignedStage = tasks.data.filter((task) => task.stageId === null);
 
     const grouped: TaskStage[] = stages.data.map((stage) => ({
       ...stage,
-      tasks: tasks.data.filter(
-        (task) => task?.stageId?.toString() === stage.id
-      ),
+      tasks: tasks.data.filter((task) => task.stageId?.toString() === stage.id),
     }));
+
+    return { unassignedStage, columns: grouped };
   }, [stages, tasks]);
 
   const handleAddCard = (args: { stageId: string }) => {};
@@ -67,10 +67,10 @@ const List = () => {
           <KanbanColumn
             id="unnasigned"
             title={"unassigned"}
-            count={taskStages?.unnasignedState.length || 0}
+            count={taskStages?.unassignedStage.length || 0}
             onAddClick={() => handleAddCard({ stageId: "unnasigned" })}
           >
-            {taskStages?.unnasignedState.map((task) => (
+            {taskStages?.unassignedStage.map((task) => (
               <KanbanItem
                 key={task.id}
                 id={task.id}
